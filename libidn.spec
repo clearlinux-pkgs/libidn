@@ -4,7 +4,7 @@
 #
 Name     : libidn
 Version  : 1.32
-Release  : 9
+Release  : 10
 URL      : http://ftp.gnu.org/gnu/libidn/libidn-1.32.tar.gz
 Source0  : http://ftp.gnu.org/gnu/libidn/libidn-1.32.tar.gz
 Summary  : IETF stringprep, nameprep, punycode, IDNA text processing.
