@@ -4,7 +4,7 @@
 #
 Name     : libidn
 Version  : 1.33
-Release  : 11
+Release  : 12
 URL      : http://ftp.gnu.org/gnu/libidn/libidn-1.33.tar.gz
 Source0  : http://ftp.gnu.org/gnu/libidn/libidn-1.33.tar.gz
 Summary  : IETF stringprep, nameprep, punycode, IDNA text processing.
@@ -117,8 +117,8 @@ rm -rf %{buildroot}
 %files dev
 %defattr(-,root,root,-)
 /usr/include/*.h
-/usr/lib64/*.so
-/usr/lib64/pkgconfig/*.pc
+/usr/lib64/libidn.so
+/usr/lib64/pkgconfig/libidn.pc
 
 %files doc
 %defattr(-,root,root,-)
@@ -128,7 +128,8 @@ rm -rf %{buildroot}
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/*.so.*
+/usr/lib64/libidn.so.11
+/usr/lib64/libidn.so.11.6.16
 
 %files locales -f libidn.lang 
 %defattr(-,root,root,-)
