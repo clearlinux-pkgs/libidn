@@ -4,7 +4,7 @@
 #
 Name     : libidn
 Version  : 1.33
-Release  : 14
+Release  : 15
 URL      : http://ftp.gnu.org/gnu/libidn/libidn-1.33.tar.gz
 Source0  : http://ftp.gnu.org/gnu/libidn/libidn-1.33.tar.gz
 Summary  : IETF stringprep, nameprep, punycode, IDNA text processing.
