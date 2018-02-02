@@ -6,7 +6,7 @@
 #
 Name     : libidn
 Version  : 1.33
-Release  : 17
+Release  : 18
 URL      : http://ftp.gnu.org/gnu/libidn/libidn-1.33.tar.gz
 Source0  : http://ftp.gnu.org/gnu/libidn/libidn-1.33.tar.gz
 Source99 : http://ftp.gnu.org/gnu/libidn/libidn-1.33.tar.gz.sig
