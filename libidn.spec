@@ -6,10 +6,10 @@
 #
 Name     : libidn
 Version  : 1.33
-Release  : 18
-URL      : http://ftp.gnu.org/gnu/libidn/libidn-1.33.tar.gz
-Source0  : http://ftp.gnu.org/gnu/libidn/libidn-1.33.tar.gz
-Source99 : http://ftp.gnu.org/gnu/libidn/libidn-1.33.tar.gz.sig
+Release  : 19
+URL      : https://mirrors.kernel.org/gnu/libidn/libidn-1.33.tar.gz
+Source0  : https://mirrors.kernel.org/gnu/libidn/libidn-1.33.tar.gz
+Source99 : https://mirrors.kernel.org/gnu/libidn/libidn-1.33.tar.gz.sig
 Summary  : IETF stringprep, nameprep, punycode, IDNA text processing.
 Group    : Development/Tools
 License  : Apache-2.0 GPL-2.0 GPL-3.0 LGPL-2.1 LGPL-3.0 MIT
@@ -124,9 +124,9 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1509399705
+export SOURCE_DATE_EPOCH=1520624404
 %configure --disable-static
-make V=1  %{?_smp_mflags}
+make  %{?_smp_mflags}
 
 pushd ../build32/
 export PKG_CONFIG_PATH="/usr/lib32/pkgconfig"
@@ -134,7 +134,7 @@ export CFLAGS="$CFLAGS -m32"
 export CXXFLAGS="$CXXFLAGS -m32"
 export LDFLAGS="$LDFLAGS -m32"
 %configure --disable-static    --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
-make V=1  %{?_smp_mflags}
+make  %{?_smp_mflags}
 popd
 %check
 export LANG=C
@@ -144,7 +144,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1509399705
+export SOURCE_DATE_EPOCH=1520624404
 rm -rf %{buildroot}
 pushd ../build32/
 %make_install32
