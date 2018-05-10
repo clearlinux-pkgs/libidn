@@ -6,7 +6,7 @@
 #
 Name     : libidn
 Version  : 1.33
-Release  : 19
+Release  : 20
 URL      : https://mirrors.kernel.org/gnu/libidn/libidn-1.33.tar.gz
 Source0  : https://mirrors.kernel.org/gnu/libidn/libidn-1.33.tar.gz
 Source99 : https://mirrors.kernel.org/gnu/libidn/libidn-1.33.tar.gz.sig
