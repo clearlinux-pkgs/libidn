@@ -6,19 +6,19 @@
 #
 Name     : libidn
 Version  : 1.35
-Release  : 21
+Release  : 22
 URL      : http://mirrors.kernel.org/gnu/libidn/libidn-1.35.tar.gz
 Source0  : http://mirrors.kernel.org/gnu/libidn/libidn-1.35.tar.gz
-Source99 : http://mirrors.kernel.org/gnu/libidn/libidn-1.35.tar.gz.sig
+Source1 : http://mirrors.kernel.org/gnu/libidn/libidn-1.35.tar.gz.sig
 Summary  : IETF stringprep, nameprep, punycode, IDNA text processing.
 Group    : Development/Tools
 License  : Apache-2.0 GPL-2.0 GPL-3.0 LGPL-2.1 LGPL-3.0 MIT
-Requires: libidn-bin
-Requires: libidn-lib
-Requires: libidn-license
-Requires: libidn-data
-Requires: libidn-locales
-Requires: libidn-man
+Requires: libidn-bin = %{version}-%{release}
+Requires: libidn-data = %{version}-%{release}
+Requires: libidn-lib = %{version}-%{release}
+Requires: libidn-license = %{version}-%{release}
+Requires: libidn-locales = %{version}-%{release}
+Requires: libidn-man = %{version}-%{release}
 BuildRequires : docbook-xml
 BuildRequires : emacs
 BuildRequires : gcc-dev32
@@ -44,7 +44,6 @@ Summary: bin components for the libidn package.
 Group: Binaries
 Requires: libidn-data = %{version}-%{release}
 Requires: libidn-license = %{version}-%{release}
-Requires: libidn-man = %{version}-%{release}
 
 %description bin
 bin components for the libidn package.
@@ -65,6 +64,7 @@ Requires: libidn-lib = %{version}-%{release}
 Requires: libidn-bin = %{version}-%{release}
 Requires: libidn-data = %{version}-%{release}
 Provides: libidn-devel = %{version}-%{release}
+Requires: libidn = %{version}-%{release}
 
 %description dev
 dev components for the libidn package.
@@ -145,21 +145,30 @@ popd
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1537306082
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1569526710
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
 make  %{?_smp_mflags}
 
 pushd ../build32/
 export PKG_CONFIG_PATH="/usr/lib32/pkgconfig"
-export CFLAGS="$CFLAGS -m32"
-export CXXFLAGS="$CXXFLAGS -m32"
-export LDFLAGS="$LDFLAGS -m32"
+export ASFLAGS="${ASFLAGS}${ASFLAGS:+ }--32"
+export CFLAGS="${CFLAGS}${CFLAGS:+ }-m32 -mstackrealign"
+export CXXFLAGS="${CXXFLAGS}${CXXFLAGS:+ }-m32 -mstackrealign"
+export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32 -mstackrealign"
 %configure --disable-static    --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
 make  %{?_smp_mflags}
 popd
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -168,16 +177,16 @@ cd ../build32;
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1537306082
+export SOURCE_DATE_EPOCH=1569526710
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/libidn
-cp COPYING %{buildroot}/usr/share/doc/libidn/COPYING
-cp COPYING.LESSERv2 %{buildroot}/usr/share/doc/libidn/COPYING.LESSERv2
-cp COPYING.LESSERv3 %{buildroot}/usr/share/doc/libidn/COPYING.LESSERv3
-cp COPYINGv2 %{buildroot}/usr/share/doc/libidn/COPYINGv2
-cp COPYINGv3 %{buildroot}/usr/share/doc/libidn/COPYINGv3
-cp doc/specifications/COPYING.UCD %{buildroot}/usr/share/doc/libidn/doc_specifications_COPYING.UCD
-cp java/LICENSE-2.0.txt %{buildroot}/usr/share/doc/libidn/java_LICENSE-2.0.txt
+mkdir -p %{buildroot}/usr/share/package-licenses/libidn
+cp COPYING %{buildroot}/usr/share/package-licenses/libidn/COPYING
+cp COPYING.LESSERv2 %{buildroot}/usr/share/package-licenses/libidn/COPYING.LESSERv2
+cp COPYING.LESSERv3 %{buildroot}/usr/share/package-licenses/libidn/COPYING.LESSERv3
+cp COPYINGv2 %{buildroot}/usr/share/package-licenses/libidn/COPYINGv2
+cp COPYINGv3 %{buildroot}/usr/share/package-licenses/libidn/COPYINGv3
+cp doc/specifications/COPYING.UCD %{buildroot}/usr/share/package-licenses/libidn/doc_specifications_COPYING.UCD
+cp java/LICENSE-2.0.txt %{buildroot}/usr/share/package-licenses/libidn/java_LICENSE-2.0.txt
 pushd ../build32/
 %make_install32
 if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
@@ -204,7 +213,13 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
-/usr/include/*.h
+/usr/include/idn-free.h
+/usr/include/idn-int.h
+/usr/include/idna.h
+/usr/include/pr29.h
+/usr/include/punycode.h
+/usr/include/stringprep.h
+/usr/include/tld.h
 /usr/lib64/libidn.so
 /usr/lib64/pkgconfig/libidn.pc
 /usr/share/man/man3/idn_free.3
@@ -276,17 +291,17 @@ popd
 /usr/lib32/libidn.so.12.6.0
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/libidn/COPYING
-/usr/share/doc/libidn/COPYING.LESSERv2
-/usr/share/doc/libidn/COPYING.LESSERv3
-/usr/share/doc/libidn/COPYINGv2
-/usr/share/doc/libidn/COPYINGv3
-/usr/share/doc/libidn/doc_specifications_COPYING.UCD
-/usr/share/doc/libidn/java_LICENSE-2.0.txt
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/libidn/COPYING
+/usr/share/package-licenses/libidn/COPYING.LESSERv2
+/usr/share/package-licenses/libidn/COPYING.LESSERv3
+/usr/share/package-licenses/libidn/COPYINGv2
+/usr/share/package-licenses/libidn/COPYINGv3
+/usr/share/package-licenses/libidn/doc_specifications_COPYING.UCD
+/usr/share/package-licenses/libidn/java_LICENSE-2.0.txt
 
 %files man
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/man/man1/idn.1
 
 %files locales -f libidn.lang
