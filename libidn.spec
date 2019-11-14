@@ -6,7 +6,7 @@
 #
 Name     : libidn
 Version  : 1.35
-Release  : 22
+Release  : 23
 URL      : http://mirrors.kernel.org/gnu/libidn/libidn-1.35.tar.gz
 Source0  : http://mirrors.kernel.org/gnu/libidn/libidn-1.35.tar.gz
 Source1 : http://mirrors.kernel.org/gnu/libidn/libidn-1.35.tar.gz.sig
@@ -15,6 +15,7 @@ Group    : Development/Tools
 License  : Apache-2.0 GPL-2.0 GPL-3.0 LGPL-2.1 LGPL-3.0 MIT
 Requires: libidn-bin = %{version}-%{release}
 Requires: libidn-data = %{version}-%{release}
+Requires: libidn-info = %{version}-%{release}
 Requires: libidn-lib = %{version}-%{release}
 Requires: libidn-license = %{version}-%{release}
 Requires: libidn-locales = %{version}-%{release}
@@ -82,13 +83,12 @@ Requires: libidn-dev = %{version}-%{release}
 dev32 components for the libidn package.
 
 
-%package doc
-Summary: doc components for the libidn package.
-Group: Documentation
-Requires: libidn-man = %{version}-%{release}
+%package info
+Summary: info components for the libidn package.
+Group: Default
 
-%description doc
-doc components for the libidn package.
+%description info
+info components for the libidn package.
 
 
 %package lib
@@ -137,6 +137,7 @@ man components for the libidn package.
 
 %prep
 %setup -q -n libidn-1.35
+cd %{_builddir}/libidn-1.35
 pushd ..
 cp -a libidn-1.35 build32
 popd
@@ -146,7 +147,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1569526710
+export SOURCE_DATE_EPOCH=1573772923
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -177,16 +178,16 @@ cd ../build32;
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1569526710
+export SOURCE_DATE_EPOCH=1573772923
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libidn
-cp COPYING %{buildroot}/usr/share/package-licenses/libidn/COPYING
-cp COPYING.LESSERv2 %{buildroot}/usr/share/package-licenses/libidn/COPYING.LESSERv2
-cp COPYING.LESSERv3 %{buildroot}/usr/share/package-licenses/libidn/COPYING.LESSERv3
-cp COPYINGv2 %{buildroot}/usr/share/package-licenses/libidn/COPYINGv2
-cp COPYINGv3 %{buildroot}/usr/share/package-licenses/libidn/COPYINGv3
-cp doc/specifications/COPYING.UCD %{buildroot}/usr/share/package-licenses/libidn/doc_specifications_COPYING.UCD
-cp java/LICENSE-2.0.txt %{buildroot}/usr/share/package-licenses/libidn/java_LICENSE-2.0.txt
+cp %{_builddir}/libidn-1.35/COPYING %{buildroot}/usr/share/package-licenses/libidn/248b64d247f0104e0b86a63358f8310f641a3433
+cp %{_builddir}/libidn-1.35/COPYING.LESSERv2 %{buildroot}/usr/share/package-licenses/libidn/01a6b4bf79aca9b556822601186afab86e8c4fbf
+cp %{_builddir}/libidn-1.35/COPYING.LESSERv3 %{buildroot}/usr/share/package-licenses/libidn/f45ee1c765646813b442ca58de72e20a64a7ddba
+cp %{_builddir}/libidn-1.35/COPYINGv2 %{buildroot}/usr/share/package-licenses/libidn/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/libidn-1.35/COPYINGv3 %{buildroot}/usr/share/package-licenses/libidn/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/libidn-1.35/doc/specifications/COPYING.UCD %{buildroot}/usr/share/package-licenses/libidn/f13a577febd13d4323fb91f99615f194826511fd
+cp %{_builddir}/libidn-1.35/java/LICENSE-2.0.txt %{buildroot}/usr/share/package-licenses/libidn/2b8b815229aa8a61e483fb4ba0588b8b6c491890
 pushd ../build32/
 %make_install32
 if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
@@ -276,9 +277,10 @@ popd
 /usr/lib32/pkgconfig/32libidn.pc
 /usr/lib32/pkgconfig/libidn.pc
 
-%files doc
+%files info
 %defattr(0644,root,root,0755)
-%doc /usr/share/info/*
+/usr/share/info/libidn-components.png
+/usr/share/info/libidn.info
 
 %files lib
 %defattr(-,root,root,-)
@@ -292,13 +294,13 @@ popd
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/libidn/COPYING
-/usr/share/package-licenses/libidn/COPYING.LESSERv2
-/usr/share/package-licenses/libidn/COPYING.LESSERv3
-/usr/share/package-licenses/libidn/COPYINGv2
-/usr/share/package-licenses/libidn/COPYINGv3
-/usr/share/package-licenses/libidn/doc_specifications_COPYING.UCD
-/usr/share/package-licenses/libidn/java_LICENSE-2.0.txt
+/usr/share/package-licenses/libidn/01a6b4bf79aca9b556822601186afab86e8c4fbf
+/usr/share/package-licenses/libidn/248b64d247f0104e0b86a63358f8310f641a3433
+/usr/share/package-licenses/libidn/2b8b815229aa8a61e483fb4ba0588b8b6c491890
+/usr/share/package-licenses/libidn/4cc77b90af91e615a64ae04893fdffa7939db84c
+/usr/share/package-licenses/libidn/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+/usr/share/package-licenses/libidn/f13a577febd13d4323fb91f99615f194826511fd
+/usr/share/package-licenses/libidn/f45ee1c765646813b442ca58de72e20a64a7ddba
 
 %files man
 %defattr(0644,root,root,0755)
