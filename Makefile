@@ -1,5 +1,5 @@
 PKG_NAME := libidn
-URL = http://mirrors.kernel.org/gnu/libidn/libidn-1.35.tar.gz
+URL = https://mirrors.kernel.org/gnu/libidn/libidn-1.36.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common

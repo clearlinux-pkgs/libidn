@@ -1,22 +1,32 @@
-Configure miss: C# compiler
+Configure miss: whether the compiler is clang
+Configure miss: compiler option needed when checking for declarations
 Configure miss: pthread_sigmask
 Configure miss: crtdefs.h
+Configure miss: C# compiler
 Configure miss: strerror_r with POSIX signature
+Configure miss: library needed for semaphore functions
 Configure miss: ioctl with POSIX signature
 Configure miss: working nanosleep
-Configure miss: whether pthread_sigmask is only a macro
+Configure miss: whether pthread_sigmask is a macro
+Configure miss: fake locale system (OpenBSD)
+Configure miss: Solaris 11.4 locale system
 Configure miss: if gcc/ld supports -Wl,--output-def
 Configure miss: GTKDOC_DEPS
 Configure miss: if implementation in Java should be built
 Configure miss: if implementation in C# should be built
-Configure miss: C# compiler
+Configure miss: whether the compiler is clang
+Configure miss: compiler option needed when checking for declarations
 Configure miss: pthread_sigmask
 Configure miss: crtdefs.h
+Configure miss: C# compiler
 Configure miss: strerror_r with POSIX signature
+Configure miss: library needed for semaphore functions
 Configure miss: whether INT64_MAX == LONG_MAX
 Configure miss: whether UINT64_MAX == ULONG_MAX
 Configure miss: ioctl with POSIX signature
-Configure miss: whether pthread_sigmask is only a macro
+Configure miss: whether pthread_sigmask is a macro
+Configure miss: fake locale system (OpenBSD)
+Configure miss: Solaris 11.4 locale system
 Configure miss: if gcc/ld supports -Wl,--output-def
 Configure miss: GTKDOC_DEPS
 Configure miss: if implementation in Java should be built
