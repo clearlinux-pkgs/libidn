@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x860B7FBB32F8119D (simon@yubico.com)
 #
 Name     : libidn
-Version  : 1.36
-Release  : 25
-URL      : https://mirrors.kernel.org/gnu/libidn/libidn-1.36.tar.gz
-Source0  : https://mirrors.kernel.org/gnu/libidn/libidn-1.36.tar.gz
-Source1  : https://mirrors.kernel.org/gnu/libidn/libidn-1.36.tar.gz.sig
+Version  : 1.37
+Release  : 26
+URL      : https://mirrors.kernel.org/gnu/libidn/libidn-1.37.tar.gz
+Source0  : https://mirrors.kernel.org/gnu/libidn/libidn-1.37.tar.gz
+Source1  : https://mirrors.kernel.org/gnu/libidn/libidn-1.37.tar.gz.sig
 Summary  : IETF stringprep, nameprep, punycode, IDNA text processing.
 Group    : Development/Tools
 License  : Apache-2.0 GPL-2.0 GPL-3.0 LGPL-2.1 LGPL-3.0 MIT
@@ -27,7 +27,6 @@ BuildRequires : gcc-libgcc32
 BuildRequires : gcc-libstdc++32
 BuildRequires : glibc-dev32
 BuildRequires : glibc-libc32
-BuildRequires : glibc-locale
 BuildRequires : gtk-doc
 BuildRequires : gtk-doc-dev
 BuildRequires : libxslt-bin
@@ -37,8 +36,8 @@ BuildRequires : valgrind
 %description
 See the end for copying conditions.
 Libidn is a package for internationalized string handling based on the
-Stringprep, Punycode, IDNA and TLD specifications.  Libidn is a GNU
-project.  See the file COPYING for licensing information.
+Stringprep, Punycode, IDNA2003 and TLD specifications.  Libidn is a
+GNU project.  See the file COPYING for licensing information.
 
 %package bin
 Summary: bin components for the libidn package.
@@ -136,10 +135,10 @@ man components for the libidn package.
 
 
 %prep
-%setup -q -n libidn-1.36
-cd %{_builddir}/libidn-1.36
+%setup -q -n libidn-1.37
+cd %{_builddir}/libidn-1.37
 pushd ..
-cp -a libidn-1.36 build32
+cp -a libidn-1.37 build32
 popd
 
 %build
@@ -147,7 +146,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1609356221
+export SOURCE_DATE_EPOCH=1621190571
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -178,16 +177,15 @@ cd ../build32;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1609356221
+export SOURCE_DATE_EPOCH=1621190571
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libidn
-cp %{_builddir}/libidn-1.36/COPYING %{buildroot}/usr/share/package-licenses/libidn/248b64d247f0104e0b86a63358f8310f641a3433
-cp %{_builddir}/libidn-1.36/COPYING.LESSERv2 %{buildroot}/usr/share/package-licenses/libidn/01a6b4bf79aca9b556822601186afab86e8c4fbf
-cp %{_builddir}/libidn-1.36/COPYING.LESSERv3 %{buildroot}/usr/share/package-licenses/libidn/f45ee1c765646813b442ca58de72e20a64a7ddba
-cp %{_builddir}/libidn-1.36/COPYINGv2 %{buildroot}/usr/share/package-licenses/libidn/4cc77b90af91e615a64ae04893fdffa7939db84c
-cp %{_builddir}/libidn-1.36/COPYINGv3 %{buildroot}/usr/share/package-licenses/libidn/8624bcdae55baeef00cd11d5dfcfa60f68710a02
-cp %{_builddir}/libidn-1.36/doc/specifications/COPYING.UCD %{buildroot}/usr/share/package-licenses/libidn/f13a577febd13d4323fb91f99615f194826511fd
-cp %{_builddir}/libidn-1.36/java/LICENSE-2.0.txt %{buildroot}/usr/share/package-licenses/libidn/2b8b815229aa8a61e483fb4ba0588b8b6c491890
+cp %{_builddir}/libidn-1.37/COPYING.LESSERv2 %{buildroot}/usr/share/package-licenses/libidn/01a6b4bf79aca9b556822601186afab86e8c4fbf
+cp %{_builddir}/libidn-1.37/COPYING.LESSERv3 %{buildroot}/usr/share/package-licenses/libidn/f45ee1c765646813b442ca58de72e20a64a7ddba
+cp %{_builddir}/libidn-1.37/COPYINGv2 %{buildroot}/usr/share/package-licenses/libidn/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/libidn-1.37/COPYINGv3 %{buildroot}/usr/share/package-licenses/libidn/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/libidn-1.37/doc/specifications/COPYING.UCD %{buildroot}/usr/share/package-licenses/libidn/f13a577febd13d4323fb91f99615f194826511fd
+cp %{_builddir}/libidn-1.37/java/LICENSE-2.0.txt %{buildroot}/usr/share/package-licenses/libidn/2b8b815229aa8a61e483fb4ba0588b8b6c491890
 pushd ../build32/
 %make_install32
 if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
@@ -285,17 +283,16 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libidn.so.12
-/usr/lib64/libidn.so.12.6.1
+/usr/lib64/libidn.so.12.6.2
 
 %files lib32
 %defattr(-,root,root,-)
 /usr/lib32/libidn.so.12
-/usr/lib32/libidn.so.12.6.1
+/usr/lib32/libidn.so.12.6.2
 
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/libidn/01a6b4bf79aca9b556822601186afab86e8c4fbf
-/usr/share/package-licenses/libidn/248b64d247f0104e0b86a63358f8310f641a3433
 /usr/share/package-licenses/libidn/2b8b815229aa8a61e483fb4ba0588b8b6c491890
 /usr/share/package-licenses/libidn/4cc77b90af91e615a64ae04893fdffa7939db84c
 /usr/share/package-licenses/libidn/8624bcdae55baeef00cd11d5dfcfa60f68710a02
