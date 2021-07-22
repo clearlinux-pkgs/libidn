@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x860B7FBB32F8119D (simon@yubico.com)
 #
 Name     : libidn
-Version  : 1.37
-Release  : 26
-URL      : https://mirrors.kernel.org/gnu/libidn/libidn-1.37.tar.gz
-Source0  : https://mirrors.kernel.org/gnu/libidn/libidn-1.37.tar.gz
-Source1  : https://mirrors.kernel.org/gnu/libidn/libidn-1.37.tar.gz.sig
+Version  : 1.38
+Release  : 27
+URL      : https://mirrors.kernel.org/gnu/libidn/libidn-1.38.tar.gz
+Source0  : https://mirrors.kernel.org/gnu/libidn/libidn-1.38.tar.gz
+Source1  : https://mirrors.kernel.org/gnu/libidn/libidn-1.38.tar.gz.sig
 Summary  : IETF stringprep, nameprep, punycode, IDNA text processing.
 Group    : Development/Tools
 License  : Apache-2.0 GPL-2.0 GPL-3.0 LGPL-2.1 LGPL-3.0 MIT
@@ -135,10 +135,10 @@ man components for the libidn package.
 
 
 %prep
-%setup -q -n libidn-1.37
-cd %{_builddir}/libidn-1.37
+%setup -q -n libidn-1.38
+cd %{_builddir}/libidn-1.38
 pushd ..
-cp -a libidn-1.37 build32
+cp -a libidn-1.38 build32
 popd
 
 %build
@@ -146,15 +146,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1621190571
+export SOURCE_DATE_EPOCH=1626974267
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -177,15 +177,16 @@ cd ../build32;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1621190571
+export SOURCE_DATE_EPOCH=1626974267
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libidn
-cp %{_builddir}/libidn-1.37/COPYING.LESSERv2 %{buildroot}/usr/share/package-licenses/libidn/01a6b4bf79aca9b556822601186afab86e8c4fbf
-cp %{_builddir}/libidn-1.37/COPYING.LESSERv3 %{buildroot}/usr/share/package-licenses/libidn/f45ee1c765646813b442ca58de72e20a64a7ddba
-cp %{_builddir}/libidn-1.37/COPYINGv2 %{buildroot}/usr/share/package-licenses/libidn/4cc77b90af91e615a64ae04893fdffa7939db84c
-cp %{_builddir}/libidn-1.37/COPYINGv3 %{buildroot}/usr/share/package-licenses/libidn/8624bcdae55baeef00cd11d5dfcfa60f68710a02
-cp %{_builddir}/libidn-1.37/doc/specifications/COPYING.UCD %{buildroot}/usr/share/package-licenses/libidn/f13a577febd13d4323fb91f99615f194826511fd
-cp %{_builddir}/libidn-1.37/java/LICENSE-2.0.txt %{buildroot}/usr/share/package-licenses/libidn/2b8b815229aa8a61e483fb4ba0588b8b6c491890
+cp %{_builddir}/libidn-1.38/COPYING %{buildroot}/usr/share/package-licenses/libidn/9073f4cea0719691d9bffa999213e60e904afd30
+cp %{_builddir}/libidn-1.38/COPYING.LESSERv2 %{buildroot}/usr/share/package-licenses/libidn/01a6b4bf79aca9b556822601186afab86e8c4fbf
+cp %{_builddir}/libidn-1.38/COPYING.LESSERv3 %{buildroot}/usr/share/package-licenses/libidn/f45ee1c765646813b442ca58de72e20a64a7ddba
+cp %{_builddir}/libidn-1.38/COPYINGv2 %{buildroot}/usr/share/package-licenses/libidn/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/libidn-1.38/COPYINGv3 %{buildroot}/usr/share/package-licenses/libidn/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/libidn-1.38/doc/specifications/COPYING.UCD %{buildroot}/usr/share/package-licenses/libidn/f13a577febd13d4323fb91f99615f194826511fd
+cp %{_builddir}/libidn-1.38/java/LICENSE-2.0.txt %{buildroot}/usr/share/package-licenses/libidn/2b8b815229aa8a61e483fb4ba0588b8b6c491890
 pushd ../build32/
 %make_install32
 if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
@@ -283,12 +284,12 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libidn.so.12
-/usr/lib64/libidn.so.12.6.2
+/usr/lib64/libidn.so.12.6.3
 
 %files lib32
 %defattr(-,root,root,-)
 /usr/lib32/libidn.so.12
-/usr/lib32/libidn.so.12.6.2
+/usr/lib32/libidn.so.12.6.3
 
 %files license
 %defattr(0644,root,root,0755)
@@ -296,6 +297,7 @@ popd
 /usr/share/package-licenses/libidn/2b8b815229aa8a61e483fb4ba0588b8b6c491890
 /usr/share/package-licenses/libidn/4cc77b90af91e615a64ae04893fdffa7939db84c
 /usr/share/package-licenses/libidn/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+/usr/share/package-licenses/libidn/9073f4cea0719691d9bffa999213e60e904afd30
 /usr/share/package-licenses/libidn/f13a577febd13d4323fb91f99615f194826511fd
 /usr/share/package-licenses/libidn/f45ee1c765646813b442ca58de72e20a64a7ddba
 

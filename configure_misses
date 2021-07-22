@@ -1,4 +1,6 @@
 Configure miss: 32-bit host C ABI
+Configure miss: 64-bit time_t
+Configure miss: 64-bit time_t with _TIME_BITS=64
 Configure miss: C# compiler
 Configure miss: C# compiler
 Configure miss: GTKDOC_DEPS
