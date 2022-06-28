@@ -1,5 +1,29 @@
 Libidn NEWS -- History of user-visible changes.                 -*- outline -*-
 
+* Noteworthy changes in release 1.41 (2022-06-25) [stable]
+
+** Bump LT_REVISION for new release.
+It was mistakenly left at the same value since 1.38.
+
+** Add version number related self-checks.
+
+* Noteworthy changes in release 1.40 (2022-06-20) [stable]
+
+** lib: Bump STRINGPREP_VERSION to 1.40.
+It was mistakenly left at 1.38 in the 1.39 release.
+
+* Noteworthy changes in release 1.39 (2022-06-20) [stable]
+
+** lib: Code detecting current locale broken since 1.36.
+The code always returned ASCII.  The precise cause is complicated to
+track down but likely boils down to the new autotools/gettext
+bootstrapping sequence introduced in release 1.36.  Reported by Богдан
+Пилипенко <bogdan.pylypenko107@gmail.com>.
+
+** maint: Java JAR archive no longer included in source tarball.
+
+** Minor fixes: typos, makefiles, indentation, gnulib update, etc.
+
 * Noteworthy changes in release 1.38 (2021-07-22) [stable]
 
 ** doc: Simplify building of gdoc-generated man/texi outputs.
@@ -493,7 +517,7 @@ See doc/cyclo/.
 
 ** tests: New 'make coverage' command to generate code coverage reports.
 The output is created in doc/coverage/.  Requires the LCOV tools.  See
-http://www.gnu.org/software/libidn/coverage/ for a pre-generated copy.
+https://www.gnu.org/software/libidn/coverage/ for a pre-generated copy.
 
 ** Clarify copyright and license for gdoc, man pages, and C# port.
 
@@ -1016,7 +1040,7 @@ This was forgotten in the last release.
 ** Added functions to convert return codes to human readable text.
 
 ** Now using GNULib in command line front end (src/) for portability code.
-See <http://www.gnu.org/software/gnulib/> for more information on
+See <https://www.gnu.org/software/gnulib/> for more information on
 GNULib.  This should make the code easier to read and maintain.
 
 ** API and ABI is backwards compatible with the previous version.
@@ -1648,7 +1672,7 @@ compatibility though.
 
 * Noteworthy changes in release 0.0.1 (2002-11-06) [alpha]
 
-** Add utility functions stringprep_locale_charset(), stringprep_convert() 
+** Add utility functions stringprep_locale_charset(), stringprep_convert()
 and stringprep_locale_to_utf8 () that can be used to convert text from
 system's locale into UTF-8, which should be done before invoking
 stringprep().  The functions requires iconv() in the operating system.
@@ -1663,7 +1687,7 @@ used is included.
 ** Initial release
 
 ----------------------------------------------------------------------
-Copyright (C) 2002-2021 Simon Josefsson
+Copyright (C) 2002-2022 Simon Josefsson
 Copying and distribution of this file, with or without modification,
 are permitted in any medium without royalty provided the copyright
 notice and this notice are preserved.
